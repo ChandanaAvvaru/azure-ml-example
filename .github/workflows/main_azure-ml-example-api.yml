@@ -3,11 +3,11 @@ name: Deploy FastAPI to Azure
 on:
   push:
     branches:
-      - main  # Runs on push to main branch
+      - main
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Ensures a Linux-based environment
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout GitHub repository
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'  # Ensure this matches your Azure Web App runtime
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
@@ -28,3 +28,4 @@ jobs:
         app-name: "azure-ml-example-api"
         slot-name: "production"
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: "."
